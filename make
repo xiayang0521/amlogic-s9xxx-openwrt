@@ -424,7 +424,9 @@ extract_armbian() {
     # Copy the bootloader files
     [[ -d "${root}/lib/u-boot" ]] || mkdir -p "${root}/lib/u-boot"
     cp -f ${uboot_path}/bootloader/* ${root}/lib/u-boot
-    wget https://gitee.com/xiayang0521/amlogic-s9xxx-armbian/raw/main/build-armbian/amlogic-u-boot/bootloader/u-boot-nanopik2.bin ${root}/lib/u-boot/u-boot-nanopik2.bin
+    git clone https://gitee.com/xiayang0521/amlogic-s9xxx-armbian.git
+    cp ./amlogic-s9xxx-armbian/build-armbian/amlogic-u-boot/bootloader/u-boot-nanopik2.bin ${root}/lib/u-boot/u-boot-nanopik2.bin
+    ls ${root}/lib/u-boot/
     # Copy the overload files
     cp -f ${uboot_path}/overload/* ${boot}
 
@@ -667,6 +669,7 @@ make_image() {
 
     # Write the specified bootloader
     if [[ -n "${MAINLINE_UBOOT}" && -f "${root}/lib/u-boot/${MAINLINE_UBOOT}" ]]; then
+        echo "start write u-boot..."
         dd if="${root}/lib/u-boot/${MAINLINE_UBOOT}" of="${loop_new}" bs=1 count=444 conv=fsync 2>/dev/null
         dd if="${root}/lib/u-boot/${MAINLINE_UBOOT}" of="${loop_new}" bs=512 skip=1 seek=1 conv=fsync 2>/dev/null
         echo -e "${soc}_v${kernel} write Mainline bootloader: ${MAINLINE_UBOOT}"
