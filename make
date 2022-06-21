@@ -424,8 +424,8 @@ extract_armbian() {
     # Copy the bootloader files
     [[ -d "${root}/lib/u-boot" ]] || mkdir -p "${root}/lib/u-boot"
     cp -f ${uboot_path}/bootloader/* ${root}/lib/u-boot
-    git clone https://gitee.com/xiayang0521/amlogic-s9xxx-armbian.git
-    cp ./amlogic-s9xxx-armbian/build-armbian/amlogic-u-boot/bootloader/u-boot-nanopik2.bin ${root}/lib/u-boot/u-boot-nanopik2.bin
+    #git clone https://gitee.com/xiayang0521/amlogic-s9xxx-armbian.git
+    #cp ./amlogic-s9xxx-armbian/build-armbian/amlogic-u-boot/bootloader/u-boot-nanopik2.bin ${root}/lib/u-boot/u-boot-nanopik2.bin
     ls ${root}/lib/u-boot/
     # Copy the overload files
     cp -f ${uboot_path}/overload/* ${boot}
